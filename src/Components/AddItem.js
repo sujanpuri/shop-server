@@ -13,9 +13,9 @@ const Additem = () => {
   const [name, setName] = useState(""); // Input for the name
   const [url, seturl] = useState();
   const [price, setprice] = useState();
-  const [category, setcategory] = useState();
+  const [category, setcategory] = useState("shoe");
   const [details, setdetails] = useState();
-  const [gender, setgender] = useState();
+  const [gender, setgender] = useState("male");
   const [like, setlike] = useState();
 
   const [Items, setItems] = useState([]); // Store users as an array
@@ -28,9 +28,9 @@ const Additem = () => {
       if (
         name === "" &&
         url === "" &&
-        price == "" &&
-        category === "shoe" &&
-        gender === "male" &&
+        price === "" &&
+        category === "" &&
+        gender === "" &&
         details === ""
       ) {
         //add more items details
@@ -62,7 +62,7 @@ const Additem = () => {
         seturl("")
         setprice("")
         setcategory("shoe")
-        setgender("female")
+        setgender("male")
         setdetails("")
       }
     } catch (e) {
@@ -128,7 +128,13 @@ const Additem = () => {
         <option value="shoe">Shoes</option>
         <option value="Clothes">Clothes</option>
       </select><br/>
-      Details: <br/> <textarea value={details} onChange={(e)=>setdetails(e.target.value)} placeholder="Details" className="border-2 border-black"></textarea><br/>
+      Details: <br/> <textarea value={details} onChange={(e)=>setdetails(e.target.value)} placeholder="Details" className="border-2 border-black" 
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            addItem();
+          }
+        }}       //if only one input was there we would have done this one
+        ></textarea><br/>
       
 
       <button onClick={addItem} className="border-2 border-black">Add Item</button>
